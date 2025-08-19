@@ -1,0 +1,229 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #343333;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background: #888888;
+  color: #000000;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+.filters {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  background-color: #eee;
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.filter-btn:hover {
+  background-color: #ddd;
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.gallery-item {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px; /* Fixed height for consistent look */
+  object-fit: cover; /* Ensures images cover the area without distortion */
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05); /* Slight zoom on image hover within item */
+}
+
+/* Lightbox Styling */
+.lightbox {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.lightbox-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 85%;
+  object-fit: contain; /* Ensures the whole image is visible */
+  transition: transform 0.3s ease; /* For smooth transitions if any dynamic sizing */
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.caption-container {
+  text-align: center;
+  color: white;
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+/* Next & Previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .gallery-item img {
+    height: 150px;
+  }
+
+  .lightbox-content {
+    max-width: 95%;
+    max-height: 80%;
+  }
+
+  .prev,
+  .next {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: -30px;
+  }
+
+  .close-btn {
+    font-size: 30px;
+    top: 10px;
+    right: 20px;
+  }
+
+  .filter-btn {
+    padding: 8px 12px;
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr; /* Stack images on small screens */
+  }
+
+  .gallery-item img {
+    height: 200px; /* Make them a bit taller when stacked */
+  }
+
+  .prev,
+  .next {
+    top: initial;
+    bottom: 10px;
+    transform: none;
+    width: 40px;
+    text-align: center;
+    margin: 0 5px;
+    padding: 8px;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .lightbox-content {
+    max-height: 70%;
+  }
+}
